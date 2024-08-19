@@ -1,10 +1,15 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include "config_example.h"
-//#include "config_example.h"
+#include "config.h"
 
-//#define config config
-#define config config_example
+#ifdef config_found
+  #define config config 
+#endif
+
+#ifndef config
+  #define config config_example
+#endif
 
 // Параметры для UDP
 WiFiUDP Udp;
