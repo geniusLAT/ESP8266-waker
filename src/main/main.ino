@@ -1,13 +1,10 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
+#include "config_example.h"
+//#include "config_example.h"
 
-//TODO перенести в конфиг //Дожили, geniusLAT пишет комментарии на русском
-// Настройки Wi-Fi
-const char* ssid = "1";          // Замените на имя вашей сети
-const char* password = "2";  // Замените на пароль вашей сети
-
-// MAC-адрес ПК, который вы хотите 
-byte macAddress[6] = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }; // Замените на MAC-адрес вашего ПК
+//#define config config
+#define config config_example
 
 // Параметры для UDP
 WiFiUDP Udp;
@@ -16,12 +13,12 @@ const int port = 9; // Порт для WoL
 
 void setup() {
     Serial.begin(9600);
-    WiFi.begin(ssid, password);
+    WiFi.begin(config::ssid, config::password);
 
     // Ожидание подключения к Wi-Fi
     while (WiFi.status() != WL_CONNECTED) {
         delay(1000);
-        Serial.println("Подключение к Wi-Fi...");
+        Serial.println("Подключение к Wi-Fi "+(String)config::ssid+" ...");
     }
     Serial.println("Подключено к Wi-Fi");
     
@@ -41,7 +38,7 @@ void sendWOLPacket() {
     }
     for (int i = 1; i <= 16; i++) {
         for (int j = 0; j < 6; j++) {
-            magicPacket[i * 6 + j] = macAddress[j]; // Повторение MAC-адреса 16 раз
+            magicPacket[i * 6 + j] = config::macAddress[j]; // Повторение MAC-адреса 16 раз
         }
     }
 
