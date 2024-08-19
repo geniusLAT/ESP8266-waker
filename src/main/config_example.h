@@ -4,8 +4,15 @@
 // #define config_found true
 
  //Дожили, geniusLAT пишет комментарии на русском
+#ifndef config_found
+#define namespaceName config_example
+#endif
 
-namespace config_example
+#ifndef config_found
+#define namespaceName config
+#endif
+
+namespace namespaceName
 {
 
 // Настройки Wi-Fi
