@@ -6,7 +6,6 @@ void WiFiManager::Connect()
 {
 	WiFi.begin(waker_ssid, waker_password);
 
-	// �������� ����������� � Wi-Fi
 	while (WiFi.status() != WL_CONNECTED) 
 	{ 
 	    delay(1000);
